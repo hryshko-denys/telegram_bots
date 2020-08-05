@@ -1,32 +1,71 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Header />
     <router-view/>
   </div>
 </template>
 
-<style>
+<script>
+import Header from './components/Header.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Header,
+  },
+};
+</script>
+
+<style lang="scss">
+@import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
+
+body {
+  background-color: #FFFAF0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', 'Arial', sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+input {
+  font-family: 'Raleway', 'Arial', sans-serif;
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  overflow: hidden;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+/*to fix autofill background*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: inherit !important;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px inherit inset !important;
+}
+
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+  background-color: inherit;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none;
 }
 </style>
