@@ -11,7 +11,7 @@
 
 <script>
 import Button from '@/components/Button.vue';
-import ModalCreate from '@/components/ModalCreate.vue';
+import ModalCreate from '@/components//ModalCreate/ModalCreate.vue';
 import BotsList from '@/components/BotsList.vue';
 
 export default {
