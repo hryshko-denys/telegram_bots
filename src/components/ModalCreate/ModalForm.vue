@@ -66,10 +66,10 @@ export default {
       this.$emit('closeModal');
     },
     onHandleName(value) {
-      this.currentName = value;
+      this.currentName = value.replace(/^[\s]+|\s{2,}|\s+$/g, ''); // to handle spaces;
     },
     onHandleDescription(value) {
-      this.currentDescription = value;
+      this.currentDescription = value.replace(/^[\s]+|\s{2,}|\s+$/g, ''); // to handle spaces;
     },
     onChangeImages(files) {
       this.addImage(files[0]);
@@ -101,8 +101,9 @@ export default {
     handleValidation(event) {
       const { value, name } = event.target;
       const errorName = `${name}Error`;
+      const validString = value.replace(/^[\s]+|\s{2,}|\s+$/g, '');
 
-      if (value.length < 3) {
+      if (validString.length < 3) {
         this.errors[errorName] = true;
         this.isValid = false;
       } else {
