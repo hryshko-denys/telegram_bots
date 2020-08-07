@@ -91,36 +91,24 @@ export default {
       reader.readAsDataURL(file);
 
       this.errors.imageError = false;
+      this.isValid = true;
     },
     handleTime(time) {
       this.currentTime = time;
+      this.errors.timeError = false;
+      this.isValid = true;
     },
     handleValidation(event) {
       const { value, name } = event.target;
       const errorName = `${name}Error`;
-      let isCorrect;
-      // console.log(value, name);
 
-      switch (name) {
-        case 'name':
-        case 'description':
-          isCorrect = value.length < 3;
-          break;
-        // case 'img':
-        //   isCorrect = !patternUrl.test(value);
-        //   break;
-        // case 'imdbUrl':
-        //   isCorrect = !patternUrl.test(value);
-        //   break;
-        // case 'imdbId':
-        //   isCorrect = !patternImdbId.test(value);
-        // break;
-        default: isCorrect = false;
+      if (value.length < 3) {
+        this.errors[errorName] = true;
+        this.isValid = false;
+      } else {
+        this.errors[errorName] = false;
+        this.isValid = true;
       }
-
-      this.errors[errorName] = isCorrect;
-      this.isValid = Object.values(this.errors)
-        .every((input) => input === false);
     },
     handleNewBot(event) {
       event.preventDefault();
@@ -132,18 +120,27 @@ export default {
         currentTime,
       } = this;
 
-      if (currentName.length < 4) {
+      if (currentName.length < 3) {
         this.errors.nameError = true;
+        this.isValid = false;
+        return;
+      }
+
+      if (currentDescription.length < 3) {
+        this.errors.descriptionError = true;
+        this.isValid = false;
         return;
       }
 
       if (!currentImages.length) {
         this.errors.imageError = true;
+        this.isValid = false;
         return;
       }
 
       if (!currentTime) {
-        this.errors.currentTime = true;
+        this.errors.timeError = true;
+        this.isValid = false;
         return;
       }
 
@@ -163,8 +160,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../styles/variables";
-
 .modal {
 
   &__form {

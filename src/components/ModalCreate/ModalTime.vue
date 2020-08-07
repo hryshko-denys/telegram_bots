@@ -1,6 +1,10 @@
 <template>
   <div class="modal__date-wrapper">
-    <label for="data" class="modal__label modal__label--date">
+    <label
+      for="data"
+      class="modal__label modal__label--date"
+      v-bind:class="{ modal__time_error: timeError }"
+    >
       Choose the date here
     </label>
     <date-picker
@@ -28,6 +32,7 @@ export default {
   components: {
     DatePicker,
   },
+  props: ['timeError'],
   data() {
     return {
       time: null,
@@ -60,6 +65,10 @@ export default {
     font-weight: bold;
 
     cursor: pointer;
+  }
+
+  &__time_error {
+    color: red;
   }
 }
 </style>
