@@ -1,7 +1,8 @@
 <template>
   <div class="modal__buttons">
     <button
-      type="submit"
+      @click="onSubmit"
+      type="button"
       class="modal__button modal__button--add"
     >
       Add new Bot
@@ -25,6 +26,9 @@ export default {
   methods: {
     closeModalCreate() {
       this.$emit('closeModal');
+    },
+    onSubmit() {
+      this.$emit('handleSubmit');
     },
   },
 };

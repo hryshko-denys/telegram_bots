@@ -7,6 +7,7 @@
       class="modal__date"
       id="date"
       v-model="time"
+      @change="handleTime"
       type="datetime"
       lang="eng"
       valueType="format"
@@ -32,36 +33,12 @@ export default {
       time: null,
     };
   },
-  // methods: {
-  //   closeModalCreate() {
-  //     this.$emit('closeModal');
-  //   },
-  // },
+  methods: {
+    handleTime() {
+      const { time } = this;
+      console.log(time);
+      this.$emit('changeTime', time);
+    },
+  },
 };
 </script>
-
-<style lang="scss">
-@import "../../styles/variables";
-
-.modal {
-
-  &__label {
-    position: relative;
-    font-size: 1.5rem;
-    font-weight: bold;
-
-    cursor: pointer;
-  }
-
-  &__label--date {
-    cursor: auto;
-  }
-
-  &__date-wrapper {
-    display: flex;
-    justify-content: space-between;
-
-    width: 100%;
-  }
-}
-</style>

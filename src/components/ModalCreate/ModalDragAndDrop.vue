@@ -1,17 +1,20 @@
 <template>
   <div
     class="modal__upload"
-    @dragenter="onDragEnter"
-    @dragleave="onDragLeave"
+    @dragenter.prevent="onDragEnter"
+    @dragleave.prevent="onDragLeave"
     @dragover.prevent
-    @drop="onDrop"
+    @drop.prevent="onDrop"
     :class="{ modal__dragging: isDragging }"
   >
     <ModalUpload
-      v-bind:images="images"
-      v-on:changeInput="onChangeInput"
+      v-bind:currentImages="currentImages"
+      v-on:changeImages="onChangeImages"
     />
-    <ModalImages v-bind:images="images" v-bind:files="files" />
+    <ModalImages
+      v-bind:currentImages="currentImages"
+      v-bind:currentFiles="currentFiles"
+     />
   </div>
 </template>
 
@@ -25,52 +28,34 @@ export default {
     ModalUpload,
     ModalImages,
   },
+  props: ['currentImages', 'currentFiles'],
   data() {
     return {
       isDragging: false,
       dragCount: 0,
-      images: [],
-      files: [],
     };
   },
   methods: {
-    onChangeInput(files) {
-      [...files].forEach((file) => this.addImage(file));
+    onChangeImages(files) {
+      this.$emit('changeImages', files);
     },
-    onDragEnter(event) {
-      event.preventDefault();
+    onDragEnter() {
       this.isDragging = true;
       this.dragCount += 1;
     },
-    onDragLeave(event) {
-      event.preventDefault();
-
+    onDragLeave() {
       this.dragCount -= 1;
       if (this.dragCount <= 0) {
         this.isDragging = false;
       }
     },
     onDrop(event) {
-      event.preventDefault();
       event.stopPropagation();
 
       this.isDragging = false;
       const { files } = event.dataTransfer;
 
-      [...files].forEach((file) => this.addImage(file));
-    },
-    addImage(file) {
-      if (!file.type.match('image.*')) {
-        return;
-      }
-
-      this.files = [...this.files, file];
-
-      const reader = new FileReader();
-
-      reader.onload = (event) => this.images.push(event.target.result);
-      reader.readAsDataURL(file);
-      console.log(this.files[0], this.images[0]);
+      this.$emit('handleOnDrop', files);
     },
   },
 };

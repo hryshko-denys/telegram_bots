@@ -2,7 +2,10 @@
   <div class="modal__wrapper">
     <div class="modal">
       <h2 class="modal__heading">Describe a new bot</h2>
-      <ModalForm v-on:closeModal="closeModalCreate" />
+      <ModalForm
+        v-on:closeModal="closeModalCreate"
+        v-on:addBot="addNewBot"
+      />
     </div>
   </div>
 </template>
@@ -18,6 +21,9 @@ export default {
   methods: {
     closeModalCreate() {
       this.$emit('closeModal');
+    },
+    addNewBot(bot) {
+      this.$emit('addBot', bot);
     },
   },
 };

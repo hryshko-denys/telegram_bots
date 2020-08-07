@@ -10,6 +10,7 @@
       class="modal__textarea"
       id="description"
       placeholder="Type a description here..."
+      @change="handleDescription"
     >
     </textarea>
   </div>
@@ -19,13 +20,12 @@
 
 export default {
   name: 'ModalTextarea',
-  components: {
+  methods: {
+    handleDescription(event) {
+      const { value } = event.target;
+      this.$emit('handleDescription', value);
+    },
   },
-  // methods: {
-  //   closeModalCreate() {
-  //     this.$emit('closeModal');
-  //   },
-  // },
 };
 </script>
 

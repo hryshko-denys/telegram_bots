@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "material-design-icons": "^3.0.1",
     "material-design-icons-iconfont": "^5.0.1",
+    "uuidv4": "^6.2.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vue2-datepicker": "^3.6.1"

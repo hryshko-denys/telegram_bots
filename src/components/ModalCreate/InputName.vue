@@ -11,6 +11,8 @@
       type="text"
       id="name"
       placeholder="Type a name here..."
+      minlength="3"
+      @change="handleName"
     >
   </div>
 </template>
@@ -21,11 +23,12 @@ export default {
   name: 'InputName',
   components: {
   },
-  // methods: {
-  //   closeModalCreate() {
-  //     this.$emit('closeModal');
-  //   },
-  // },
+  methods: {
+    handleName(event) {
+      const { value } = event.target;
+      this.$emit('handleName', value);
+    },
+  },
 };
 </script>
 

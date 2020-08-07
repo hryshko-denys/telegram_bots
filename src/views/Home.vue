@@ -4,6 +4,7 @@
     <ModalCreate
       v-if="isModalCreateVisible"
       v-on:closeModal="closeModalCreate"
+      v-on:addBot="addNewBot"
     />
     <BotsList v-bind:botsList="botsList" v-on:delete-bot="onDelete" />
   </div>
@@ -29,15 +30,17 @@ export default {
           name: 'Weather',
           id: 1,
           descripton: 'Get actual weather',
-          img: '1.jpg',
-          date: '14.07.2020',
+          file: 'starwars.jpg',
+          image: '...',
+          time: '2020-08-25 17:05:05 pm',
         },
         {
           name: 'News',
           id: 2,
           descripton: 'Get actual news',
-          img: '2.jpg',
-          date: '15.07.2020',
+          file: 'yalantis.png',
+          image: '...',
+          time: '2020-08-25 17:05:05 pm',
         },
       ],
     };
@@ -51,6 +54,9 @@ export default {
     },
     onDelete(botId) {
       this.botsList = this.botsList.filter((bot) => bot.id !== botId);
+    },
+    addNewBot(bot) {
+      this.botsList = [...this.botsList, bot];
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal__drag-wrapper" v-show="!images.length">
+  <div class="modal__drag-wrapper" v-show="!currentImages.length">
     <h2 class="modal__label modal__label--upload">
       Drag your image here
     </h2>
@@ -11,7 +11,7 @@
       type="file"
       id="file"
       value=null
-      @change="onChangeInput"
+      @change="onChangeImages"
       multiple
     >
   </div>
@@ -20,11 +20,11 @@
 <script>
 export default {
   name: 'ModalUpload',
-  props: ['images'],
+  props: ['currentImages'],
   methods: {
-    onChangeInput(event) {
+    onChangeImages(event) {
       const { files } = event.target;
-      this.$emit('changeInput', files);
+      this.$emit('changeImages', files);
     },
   },
 };
@@ -78,7 +78,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 45px;
+    min-height: 55px;
   }
 
   &__download {

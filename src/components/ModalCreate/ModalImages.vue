@@ -1,9 +1,9 @@
 <template>
-  <div class="modal__images images" v-show="images.length">
+  <div class="modal__images images" v-show="currentImages.length">
     <div class="images__list">
       <div
         class="images__wrapper"
-        v-for="(image, index) in images"
+        v-for="(image, index) in currentImages"
         :key="index"
       >
         <img
@@ -12,14 +12,12 @@
           class="images__item"
         >
         <div class="images__details">
-          <span class="images__name" v-text="files[index].name"></span>
-          <span class="images__size" v-text="files[index].size"></span>
+          <span class="images__name" v-text="currentFiles[index].name"></span>
         </div>
       </div>
     </div>
     <div class="images__buttons">
         <button class="images__button">Select another file</button>
-        <button class="images__button">Upload</button>
     </div>
   </div>
 </template>
@@ -27,7 +25,7 @@
 <script>
 export default {
   name: 'ModalImages',
-  props: ['images', 'files'],
+  props: ['currentImages', 'currentFiles'],
 };
 </script>
 
@@ -82,10 +80,6 @@ export default {
     text-transform: uppercase;
     letter-spacing: 0.5em;
     transition: background-color 0.2s cubic-bezier(.4,0,.2,1);
-  }
-
-  &__button:last-child {
-    margin-left: 20px;
   }
 
   &__button:hover {
