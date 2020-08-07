@@ -5,7 +5,11 @@
       v-bind:handleValidation="handleValidation"
       v-bind:nameError="errors.nameError"
     />
-    <ModalTextarea v-on:handleDescription="onHandleDescription" />
+    <ModalTextarea
+      v-on:handleDescription="onHandleDescription"
+      v-bind:handleValidation="handleValidation"
+      v-bind:descriptionError="errors.descriptionError"
+     />
     <ModalDragAndDrop
       v-bind:currentImages="currentImages"
       v-bind:currentFiles="currentFiles"
@@ -93,11 +97,12 @@ export default {
 
       switch (name) {
         case 'name':
+        case 'description':
           isCorrect = value.length < 3;
           break;
-        // case 'imgUrl':
-        //   isCorrect = !patternUrl.test(value);
-        //   break;
+        case 'img':
+          isCorrect = !patternUrl.test(value);
+          break;
         // case 'imdbUrl':
         //   isCorrect = !patternUrl.test(value);
         //   break;
@@ -122,6 +127,7 @@ export default {
       } = this;
 
       if (currentName.length < 4) {
+        this.errors.nameError = true;
         return;
       }
 

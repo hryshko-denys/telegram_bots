@@ -60,7 +60,7 @@ export default {
 
   &__input-wrapper {
     position: relative;
-    width: 45%;
+    width: 40%;
     padding: 10px;
 
     border: 1px solid $blue;

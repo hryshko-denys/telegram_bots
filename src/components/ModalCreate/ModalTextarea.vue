@@ -6,13 +6,20 @@
     >
       Description
     </label>
-    <textarea
-      class="modal__textarea"
-      id="description"
-      placeholder="Type a description here..."
-      @change="handleDescription"
+    <div
+      class="modal__textarea-wrapper"
+      v-bind:class="{ modal__description_error: descriptionError }"
     >
-    </textarea>
+      <textarea
+        name="description"
+        class="modal__textarea"
+        id="description"
+        placeholder="Type a description here..."
+        @change="handleDescription"
+        @blur="handleValidation"
+      >
+      </textarea>
+    </div>
   </div>
 </template>
 
@@ -20,6 +27,7 @@
 
 export default {
   name: 'ModalTextarea',
+  props: ['descriptionError', 'handleValidation'],
   methods: {
     handleDescription(event) {
       const { value } = event.target;
@@ -50,11 +58,31 @@ export default {
     cursor: pointer;
   }
 
-  &__textarea {
+  &__textarea-wrapper {
+    position: relative;
+    width: 40%;
     padding: 10px;
+
     border: 1px solid $blue;
     border-radius: 15px;
-    width: 45%;
+  }
+
+  &__textarea {
+    width: 100%;
+  }
+
+  &__description_error {
+    border: 1px solid $tomatored;
+  }
+
+  &__description_error::after {
+    content: 'Type correct description';
+    position: absolute;
+    top: calc(50% - 11px);
+    left: -190px;
+    display: block;
+
+    color: $tomatored;
   }
 
   &__textarea::placeholder {
