@@ -1,16 +1,23 @@
 <template>
   <div class="modal__drag-wrapper" v-show="!currentImages.length">
-    <h2 class="modal__label modal__label--upload">
+    <h2
+      class="modal__label modal__label--upload"
+      v-bind:class="{ modal__image_error: imageError }"
+    >
       Drag your image here
     </h2>
-    <label for="file" class="modal__label modal__label--button">
+    <label
+      for="file"
+      class="modal__label modal__label--button"
+      v-bind:class="{ modal__image_error: imageError }"
+    >
       Select a file
     </label>
     <input
+      name="image"
       class="modal__download"
       type="file"
       id="file"
-      value=null
       @change="onChangeImages"
       multiple
     >
@@ -20,7 +27,7 @@
 <script>
 export default {
   name: 'ModalUpload',
-  props: ['currentImages'],
+  props: ['currentImages', 'imageError'],
   methods: {
     onChangeImages(event) {
       const { files } = event.target;
@@ -83,6 +90,10 @@ export default {
 
   &__download {
     display: none;
+  }
+
+  &__image_error {
+    color: red;
   }
 }
 </style>

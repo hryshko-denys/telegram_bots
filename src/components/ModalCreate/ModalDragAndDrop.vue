@@ -10,6 +10,7 @@
     <ModalUpload
       v-bind:currentImages="currentImages"
       v-on:changeImages="onChangeImages"
+      v-bind:imageError="imageError"
     />
     <ModalImages
       v-bind:currentImages="currentImages"
@@ -29,7 +30,11 @@ export default {
     ModalUpload,
     ModalImages,
   },
-  props: ['currentImages', 'currentFiles'],
+  props: [
+    'currentImages',
+    'currentFiles',
+    'imageError',
+  ],
   data() {
     return {
       isDragging: false,

@@ -13,10 +13,14 @@
     <ModalDragAndDrop
       v-bind:currentImages="currentImages"
       v-bind:currentFiles="currentFiles"
+      v-bind:imageError="errors.imageError"
       v-on:changeImages="onChangeImages"
       v-on:handleOnDrop="onDrop"
     />
-    <ModalTime v-on:changeTime="handleTime" />
+    <ModalTime
+      v-on:changeTime="handleTime"
+      v-bind:timeError="errors.timeError"
+    />
     <ModalButtons
       v-on:closeModal="closeModalCreate"
       v-bind:isValid="isValid"
@@ -85,6 +89,8 @@ export default {
       this.currentImages.pop();
       reader.onload = (event) => this.currentImages.push(event.target.result);
       reader.readAsDataURL(file);
+
+      this.errors.imageError = false;
     },
     handleTime(time) {
       this.currentTime = time;
@@ -93,16 +99,16 @@ export default {
       const { value, name } = event.target;
       const errorName = `${name}Error`;
       let isCorrect;
-      console.log(value, name);
+      // console.log(value, name);
 
       switch (name) {
         case 'name':
         case 'description':
           isCorrect = value.length < 3;
           break;
-        case 'img':
-          isCorrect = !patternUrl.test(value);
-          break;
+        // case 'img':
+        //   isCorrect = !patternUrl.test(value);
+        //   break;
         // case 'imdbUrl':
         //   isCorrect = !patternUrl.test(value);
         //   break;
@@ -128,6 +134,16 @@ export default {
 
       if (currentName.length < 4) {
         this.errors.nameError = true;
+        return;
+      }
+
+      if (!currentImages.length) {
+        this.errors.imageError = true;
+        return;
+      }
+
+      if (!currentTime) {
+        this.errors.currentTime = true;
         return;
       }
 
