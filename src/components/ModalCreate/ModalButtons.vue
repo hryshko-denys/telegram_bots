@@ -1,9 +1,9 @@
 <template>
   <div class="modal__buttons">
     <button
-      @click="onSubmit"
-      type="button"
+      type="submit"
       class="modal__button modal__button--add"
+      :disabled="!isValid"
     >
       Add new Bot
     </button>
@@ -21,15 +21,14 @@
 
 export default {
   name: 'ModalButtons',
-  components: {
-  },
+  props: ['isValid'],
   methods: {
     closeModalCreate() {
       this.$emit('closeModal');
     },
-    onSubmit() {
-      this.$emit('handleSubmit');
-    },
+    // onSubmit() {
+    //   this.$emit('handleSubmit');
+    // },
   },
 };
 </script>
@@ -61,6 +60,10 @@ export default {
 
   &__button:hover {
     opacity: 0.7;
+  }
+
+  &__button:disabled {
+    opacity: 0.2;
   }
 
   &__button--add {

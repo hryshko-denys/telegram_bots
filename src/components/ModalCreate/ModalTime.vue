@@ -42,3 +42,24 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "../../styles/variables";
+
+.modal {
+
+   &__date-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__label {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    cursor: pointer;
+  }
+}
+</style>

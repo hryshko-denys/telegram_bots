@@ -14,6 +14,7 @@
     <ModalImages
       v-bind:currentImages="currentImages"
       v-bind:currentFiles="currentFiles"
+      v-on:changeImages="onChangeImages"
      />
   </div>
 </template>

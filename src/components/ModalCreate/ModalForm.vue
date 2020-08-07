@@ -1,6 +1,10 @@
 <template>
   <form class="modal__form" @submit.prevent:="handleNewBot">
-    <InputName v-on:handleName="onHandleName" />
+    <InputName
+      v-on:handleName="onHandleName"
+      v-bind:handleValidation="handleValidation"
+      v-bind:nameError="errors.nameError"
+    />
     <ModalTextarea v-on:handleDescription="onHandleDescription" />
     <ModalDragAndDrop
       v-bind:currentImages="currentImages"
@@ -11,7 +15,7 @@
     <ModalTime v-on:changeTime="handleTime" />
     <ModalButtons
       v-on:closeModal="closeModalCreate"
-      v-on:handleSubmit="onSubmit"
+      v-bind:isValid="isValid"
     />
   </form>
 </template>
@@ -40,6 +44,13 @@ export default {
       currentFiles: [],
       currentImages: [],
       currentTime: '',
+      errors: {
+        nameError: false,
+        descriptionError: false,
+        imageError: false,
+        timeError: false,
+      },
+      isValid: true,
     };
   },
   methods: {
@@ -53,33 +64,74 @@ export default {
       this.currentDescription = value;
     },
     onChangeImages(files) {
-      [...files].forEach((file) => this.addImage(file));
+      this.addImage(files[0]);
     },
     onDrop(files) {
-      [...files].forEach((file) => this.addImage(file));
+      this.addImage(files[0]);
     },
     addImage(file) {
       if (!file.type.match('image.*')) {
         return;
       }
 
-      this.currentFiles = [...this.currentFiles, file];
+      this.currentFiles = [file];
 
       const reader = new FileReader();
+
+      this.currentImages.pop();
       reader.onload = (event) => this.currentImages.push(event.target.result);
       reader.readAsDataURL(file);
     },
     handleTime(time) {
       this.currentTime = time;
     },
-    onSubmit() {
+    handleValidation(event) {
+      const { value, name } = event.target;
+      const errorName = `${name}Error`;
+      let isCorrect;
+      console.log(value, name);
+
+      switch (name) {
+        case 'name':
+          isCorrect = value.length < 3;
+          break;
+        // case 'imgUrl':
+        //   isCorrect = !patternUrl.test(value);
+        //   break;
+        // case 'imdbUrl':
+        //   isCorrect = !patternUrl.test(value);
+        //   break;
+        // case 'imdbId':
+        //   isCorrect = !patternImdbId.test(value);
+        // break;
+        default: isCorrect = false;
+      }
+
+      this.errors[errorName] = isCorrect;
+      this.isValid = Object.values(this.errors)
+        .every((input) => input === false);
+    },
+    handleNewBot(event) {
+      event.preventDefault();
+      const {
+        currentName,
+        currentDescription,
+        currentFiles,
+        currentImages,
+        currentTime,
+      } = this;
+
+      if (currentName.length < 4) {
+        return;
+      }
+
       const newBot = {
-        name: this.currentName,
+        name: currentName,
         id: uuid(),
-        descripton: this.currentDescription,
-        file: this.currentFiles[0],
-        image: this.currentImages[0],
-        time: this.currentTime,
+        descripton: currentDescription,
+        file: currentFiles[0],
+        image: currentImages[0],
+        time: currentTime,
       };
 
       this.$emit('addBot', newBot);

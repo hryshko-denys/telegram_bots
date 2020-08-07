@@ -16,8 +16,18 @@
         </div>
       </div>
     </div>
-    <div class="images__buttons">
-        <button class="images__button">Select another file</button>
+    <div class="images__another">
+      <label for="file" class="modal__label modal__label--button">
+        Select another file
+      </label>
+      <input
+        class="modal__download"
+        type="file"
+        id="file"
+        value=null
+        @change="onChangeImages"
+        multiple
+      >
     </div>
   </div>
 </template>
@@ -26,6 +36,12 @@
 export default {
   name: 'ModalImages',
   props: ['currentImages', 'currentFiles'],
+  methods: {
+    onChangeImages(event) {
+      const { files } = event.target;
+      this.$emit('changeImages', files);
+    },
+  },
 };
 </script>
 
@@ -62,7 +78,7 @@ export default {
     object-fit: contain;
   }
 
-  &__buttons {
+  &__another {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;

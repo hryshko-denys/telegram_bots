@@ -57,6 +57,7 @@ export default {
     },
     addNewBot(bot) {
       this.botsList = [...this.botsList, bot];
+      this.isModalCreateVisible = false;
     },
   },
 };
