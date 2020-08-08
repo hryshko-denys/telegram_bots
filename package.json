@@ -1,8 +1,11 @@
 {
-  "name": "yalantis",
+  "homepage": "http://hryshko-denys.github.io/telegram_bots",
+  "name": "telegram_bots",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "bash ./deploy.sh",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"

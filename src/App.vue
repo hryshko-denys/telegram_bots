@@ -1,17 +1,19 @@
 <template>
   <div id="app">
     <Header />
-    <router-view/>
+    <Page />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import Page from './components/Page.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
+    Page,
   },
 };
 </script>
@@ -24,10 +26,6 @@ body {
 }
 
 #app {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
   font-family: 'Raleway', 'Arial', sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;

@@ -35,12 +35,12 @@
 </template>
 
 <script>
-import Button from '@/components/Button.vue';
-import ModalCreate from '@/components//ModalCreate/ModalCreate.vue';
-import BotsList from '@/components/BotsList.vue';
+import Button from './Button.vue';
+import ModalCreate from './ModalCreate/ModalCreate.vue';
+import BotsList from './BotsList.vue';
 
 export default {
-  name: 'Home',
+  name: 'Page',
   components: {
     Button,
     ModalCreate,
