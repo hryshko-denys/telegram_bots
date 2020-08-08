@@ -1,7 +1,7 @@
 <template>
   <div class="nav" id="nav">
     <div class="nav__wrapper">
-      <h1 class="nav__heading">Telegram bots!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>
+      <h1 class="nav__heading">Telegram bots</h1>
       <img
         class="nav__image"
         src="../assets/telegram.png"
