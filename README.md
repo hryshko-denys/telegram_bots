@@ -1,9 +1,9 @@
 # Telegram bots
 
 ## Task requirements
-```
-https://docs.google.com/document/d/1oSGUtx0w2cpfg5ER8DlXDeJgA7mEKrl6zv1Mz4zB3qI/edit
-```
+
+[TASK LINK](https://docs.google.com/document/d/1oSGUtx0w2cpfg5ER8DlXDeJgA7mEKrl6zv1Mz4zB3qI/edit)
+
 
 ## Demo link
 
