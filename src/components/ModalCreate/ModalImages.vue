@@ -1,9 +1,9 @@
 <template>
-  <div class="modal__images images" v-show="currentImages.length">
+  <div class="modal__images images" v-show="currentImage.length">
     <div class="images__list">
       <div
         class="images__wrapper"
-        v-for="(image, index) in currentImages"
+        v-for="(image, index) in currentImage"
         :key="index"
       >
         <img
@@ -12,7 +12,7 @@
           class="images__item"
         >
         <div class="images__details">
-          <span class="images__name" v-text="currentFiles[index].name"></span>
+          <span class="images__name" v-text="currentFile[index].name"></span>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
 <script>
 export default {
   name: 'ModalImages',
-  props: ['currentImages', 'currentFiles'],
+  props: ['currentImage', 'currentFile'],
   methods: {
     onChangeImages(event) {
       const { files } = event.target;

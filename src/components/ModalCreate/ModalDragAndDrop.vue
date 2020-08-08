@@ -8,13 +8,13 @@
     :class="{ modal__dragging: isDragging }"
   >
     <ModalUpload
-      v-bind:currentImages="currentImages"
+      v-bind:currentImage="currentImage"
       v-on:changeImages="onChangeImages"
       v-bind:imageError="imageError"
     />
     <ModalImages
-      v-bind:currentImages="currentImages"
-      v-bind:currentFiles="currentFiles"
+      v-bind:currentImage="currentImage"
+      v-bind:currentFile="currentFile"
       v-on:changeImages="onChangeImages"
      />
   </div>
@@ -31,8 +31,8 @@ export default {
     ModalImages,
   },
   props: [
-    'currentImages',
-    'currentFiles',
+    'currentImage',
+    'currentFile',
     'imageError',
   ],
   data() {

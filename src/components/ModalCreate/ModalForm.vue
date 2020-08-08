@@ -4,15 +4,17 @@
       v-on:handleName="onHandleName"
       v-bind:handleValidation="handleValidation"
       v-bind:nameError="errors.nameError"
+      v-bind:name="currentName"
     />
     <ModalTextarea
       v-on:handleDescription="onHandleDescription"
       v-bind:handleValidation="handleValidation"
       v-bind:descriptionError="errors.descriptionError"
+      v-bind:description="currentDescription"
      />
     <ModalDragAndDrop
-      v-bind:currentImages="currentImages"
-      v-bind:currentFiles="currentFiles"
+      v-bind:currentImage="currentImage"
+      v-bind:currentFile="currentFile"
       v-bind:imageError="errors.imageError"
       v-on:changeImages="onChangeImages"
       v-on:handleOnDrop="onDrop"
@@ -20,10 +22,12 @@
     <ModalTime
       v-on:changeTime="handleTime"
       v-bind:timeError="errors.timeError"
+      v-bind:currentTime="currentTime || 'choose time here'"
     />
     <ModalButtons
       v-on:closeModal="closeModalCreate"
       v-bind:isValid="isValid"
+      v-bind:buttonTitle="buttonTitle"
     />
   </form>
 </template>
@@ -45,13 +49,31 @@ export default {
     ModalTime,
     ModalButtons,
   },
+  props: {
+    botInfo: {
+      default: [],
+    },
+    title: {
+      default: 'Describe a bot',
+    },
+    buttonTitle: {
+      default: '',
+    },
+  },
   data() {
+    const name = this.botInfo.name || '';
+    const descripton = this.botInfo.descripton || '';
+    const file = this.botInfo.file || [];
+    const image = this.botInfo.image || [];
+    const time = this.botInfo.time || '';
+    const { id } = this.botInfo;
+    const { title } = this;
     return {
-      currentName: '',
-      currentDescription: '',
-      currentFiles: [],
-      currentImages: [],
-      currentTime: '',
+      currentName: name,
+      currentDescription: descripton,
+      currentFile: file,
+      currentImage: image,
+      currentTime: time,
       errors: {
         nameError: false,
         descriptionError: false,
@@ -59,6 +81,8 @@ export default {
         timeError: false,
       },
       isValid: true,
+      currentId: id,
+      modalTitle: title,
     };
   },
   methods: {
@@ -82,12 +106,12 @@ export default {
         return;
       }
 
-      this.currentFiles = [file];
+      this.currentFile = [file];
 
       const reader = new FileReader();
 
-      this.currentImages.pop();
-      reader.onload = (event) => this.currentImages.push(event.target.result);
+      this.currentImage.pop();
+      reader.onload = (event) => this.currentImage.push(event.target.result);
       reader.readAsDataURL(file);
 
       this.errors.imageError = false;
@@ -116,9 +140,11 @@ export default {
       const {
         currentName,
         currentDescription,
-        currentFiles,
-        currentImages,
+        currentFile,
+        currentImage,
         currentTime,
+        modalTitle,
+        currentId,
       } = this;
 
       if (currentName.length < 3) {
@@ -133,7 +159,7 @@ export default {
         return;
       }
 
-      if (!currentImages.length) {
+      if (!currentImage.length) {
         this.errors.imageError = true;
         this.isValid = false;
         return;
@@ -147,14 +173,17 @@ export default {
 
       const newBot = {
         name: currentName,
-        id: uuid(),
         descripton: currentDescription,
-        file: currentFiles[0],
-        image: currentImages[0],
+        file: currentFile,
+        image: currentImage,
         time: currentTime,
       };
 
-      this.$emit('addBot', newBot);
+      newBot.id = modalTitle === 'Describe a new bot'
+        ? uuid()
+        : currentId;
+
+      this.$emit('addBot', newBot, modalTitle);
     },
   },
 };

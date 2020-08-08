@@ -6,7 +6,11 @@
         v-for="bot in botsList"
         v-bind:key="bot.id"
       >
-        <BotItem v-bind:bot="bot" v-on:delete-bot="onDelete" />
+        <BotItem
+          v-bind:bot="bot"
+          v-on:delete-bot="onDelete"
+          v-on:onShowModalEdit="showModalEdit"
+        />
       </li>
     </ol>
   </div>
@@ -24,6 +28,9 @@ export default {
   methods: {
     onDelete(botId) {
       this.$emit('delete-bot', botId);
+    },
+    showModalEdit(botId) {
+      this.$emit('onShowModalEdit', botId);
     },
   },
 };

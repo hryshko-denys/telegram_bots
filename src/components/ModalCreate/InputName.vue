@@ -15,6 +15,7 @@
         class="modal__text"
         type="text"
         id="name"
+        :value="name"
         placeholder="Type a name here..."
         @change="handleName"
         @blur="handleValidation"
@@ -26,7 +27,7 @@
 <script>
 export default {
   name: 'InputName',
-  props: ['nameError', 'handleValidation'],
+  props: ['nameError', 'handleValidation', 'name'],
   methods: {
     handleName(event) {
       const { value } = event.target;

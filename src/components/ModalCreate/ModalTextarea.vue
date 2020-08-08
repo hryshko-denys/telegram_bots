@@ -15,6 +15,7 @@
         class="modal__textarea"
         id="description"
         placeholder="Type a description here..."
+        :value="description"
         @change="handleDescription"
         @blur="handleValidation"
       >
@@ -27,7 +28,7 @@
 
 export default {
   name: 'ModalTextarea',
-  props: ['descriptionError', 'handleValidation'],
+  props: ['descriptionError', 'handleValidation', 'description'],
   methods: {
     handleDescription(event) {
       const { value } = event.target;

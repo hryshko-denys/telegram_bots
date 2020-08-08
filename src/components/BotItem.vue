@@ -1,6 +1,14 @@
 <template>
-  <div class="bots__content">
-    <span class="bots__name">{{bot.name}}</span>
+  <div
+    class="bots__content"
+  >
+    <span
+      class="bots__name"
+      @click="showModalEdit(bot.id)"
+    >
+      {{bot.name}}
+    </span>
+    <img :src="bot.image[0]" :alt="`${bot.name} image`" class="bots__image">
     <div class="bots__container" @click="onDelete(bot.id)">
       <div class="bots__left"></div>
       <div class="bots__right"></div>
@@ -17,6 +25,9 @@ export default {
     onDelete(botId) {
       this.$emit('delete-bot', botId);
     },
+    showModalEdit(botId) {
+      this.$emit('onShowModalEdit', botId);
+    },
   },
 };
 </script>
@@ -28,6 +39,8 @@ export default {
   &__name {
     font-size: 2rem;
     color: #FFA07A;
+
+    cursor: pointer;
   }
 
   &__container {
@@ -86,6 +99,16 @@ export default {
   }
   &__container:hover &__close {
     opacity: 1;
+  }
+
+  &__image {
+    position: absolute;
+    top: calc(50% - 30px);
+    left: 100px;
+    max-height: 60px;
+    max-width: 60px;
+    object-fit: contain;
+    background-size: cover;
   }
 }
 

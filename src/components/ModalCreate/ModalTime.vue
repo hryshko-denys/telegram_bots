@@ -14,6 +14,7 @@
       @change="handleTime"
       type="datetime"
       lang="eng"
+      :placeholder="currentTime"
       valueType="format"
       format="YYYY-MM-DD HH:hh:ss a"
       width="500"
@@ -32,7 +33,7 @@ export default {
   components: {
     DatePicker,
   },
-  props: ['timeError'],
+  props: ['timeError', 'currentTime'],
   data() {
     return {
       time: null,

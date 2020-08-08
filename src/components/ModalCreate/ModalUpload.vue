@@ -1,5 +1,5 @@
 <template>
-  <div class="modal__drag-wrapper" v-show="!currentImages.length">
+  <div class="modal__drag-wrapper" v-show="!currentImage.length">
     <h2
       class="modal__label modal__label--upload"
       v-bind:class="{ modal__image_error: imageError }"
@@ -27,7 +27,7 @@
 <script>
 export default {
   name: 'ModalUpload',
-  props: ['currentImages', 'imageError'],
+  props: ['currentImage', 'imageError'],
   methods: {
     onChangeImages(event) {
       const { files } = event.target;

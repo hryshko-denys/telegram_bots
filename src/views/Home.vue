@@ -5,8 +5,28 @@
       v-if="isModalCreateVisible"
       v-on:closeModal="closeModalCreate"
       v-on:addBot="addNewBot"
+      v-bind:title="'Describe a new bot'"
+      v-bind:buttonTitle="'Add new bot'"
     />
-    <BotsList v-bind:botsList="botsList" v-on:delete-bot="onDelete" />
+    <ModalCreate
+      v-if="isModalEditVisible"
+      v-on:closeModal="closeModalCreate"
+      v-on:addBot="addNewBot"
+      v-bind:title="'Edit bot info'"
+      v-bind:botInfo="botToEdit"
+      v-bind:buttonTitle="'Save changes'"
+    />
+    <h2
+      class="home__heading"
+      v-if="!botsList.length"
+    >
+      Press button to add new bot
+    </h2>
+    <BotsList
+      v-bind:botsList="botsList"
+      v-on:delete-bot="onDelete"
+      v-on:onShowModalEdit="showModalEdit"
+    />
   </div>
 </template>
 
@@ -25,39 +45,48 @@ export default {
   data() {
     return {
       isModalCreateVisible: false,
-      botsList: [
-        {
-          name: 'Weather',
-          id: 1,
-          descripton: 'Get actual weather',
-          file: 'starwars.jpg',
-          image: '...',
-          time: '2020-08-25 17:05:05 pm',
-        },
-        {
-          name: 'News',
-          id: 2,
-          descripton: 'Get actual news',
-          file: 'yalantis.png',
-          image: '...',
-          time: '2020-08-25 17:05:05 pm',
-        },
-      ],
+      isModalEditVisible: false,
+      botsList: [],
+      botToEdit: null,
     };
   },
   methods: {
     showPopUpCreate() {
       this.isModalCreateVisible = true;
     },
+    showModalEdit(botId) {
+      this.isModalEditVisible = true;
+      this.botToEdit = this.botsList.find((bot) => bot.id === botId);
+    },
     closeModalCreate() {
       this.isModalCreateVisible = false;
+      this.isModalEditVisible = false;
     },
     onDelete(botId) {
       this.botsList = this.botsList.filter((bot) => bot.id !== botId);
     },
-    addNewBot(bot) {
-      this.botsList = [...this.botsList, bot];
-      this.isModalCreateVisible = false;
+    addNewBot(bot, modalTitle) {
+      console.log(bot, modalTitle);
+      if (modalTitle === 'Describe a new bot') {
+        this.botsList = [...this.botsList, bot];
+        this.isModalCreateVisible = false;
+      } else if (modalTitle === 'Edit bot info') {
+        this.botsList = this.botsList.map((currentBot) => {
+          console.log(currentBot.id, bot.id);
+          if (currentBot.id === bot.id) {
+            return {
+              id: bot.id,
+              name: bot.name,
+              descripton: bot.descripton,
+              file: bot.file,
+              image: bot.image,
+              time: bot.time,
+            };
+          }
+
+          return currentBot;
+        });
+      }
     },
   },
 };

@@ -5,7 +5,7 @@
       class="modal__button modal__button--add"
       :disabled="!isValid"
     >
-      Add new Bot
+      {{buttonTitle}}
     </button>
     <button
       type="button"
@@ -21,14 +21,18 @@
 
 export default {
   name: 'ModalButtons',
-  props: ['isValid'],
+  props: {
+    isValid: {
+      default: true,
+    },
+    buttonTitle: {
+      default: '',
+    },
+  },
   methods: {
     closeModalCreate() {
       this.$emit('closeModal');
     },
-    // onSubmit() {
-    //   this.$emit('handleSubmit');
-    // },
   },
 };
 </script>
