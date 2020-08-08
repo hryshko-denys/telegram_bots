@@ -11,7 +11,7 @@ https://docs.google.com/document/d/1oSGUtx0w2cpfg5ER8DlXDeJgA7mEKrl6zv1Mz4zB3qI/
 
 ## Project description
 
-[VIDEO DESCRIPTION](https://www.loom.com/share5ae6ff14f4e3475db49cc723a9302035)
+[VIDEO DESCRIPTION](https://www.loom.com/share/5ae6ff14f4e3475db49cc723a9302035)
 
 
 ## Tech stack
