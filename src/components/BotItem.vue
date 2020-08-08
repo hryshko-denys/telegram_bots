@@ -8,7 +8,6 @@
     >
       {{bot.name}}
     </span>
-    <img :src="bot.image[0]" :alt="`${bot.name} image`" class="bots__image">
     <div class="bots__container" @click="onDelete(bot.id)">
       <div class="bots__left"></div>
       <div class="bots__right"></div>
@@ -111,5 +110,4 @@ export default {
     background-size: cover;
   }
 }
-
 </style>
