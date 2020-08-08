@@ -1,4 +1,4 @@
-# yalantis
+# Telegram bots
 
 ## Project setup
 ```
