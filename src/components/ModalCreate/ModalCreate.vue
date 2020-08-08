@@ -1,5 +1,13 @@
 <template>
   <div class="modal__wrapper">
+  <transition appear>
+    <div
+      class="modal__overlay"
+      v-if="showModal"
+      @click="closeModalCreate"
+      >
+    </div>
+  </transition>
     <div class="modal">
       <h2 class="modal__heading">{{title}}</h2>
       <ModalForm
@@ -33,6 +41,9 @@ export default {
     buttonTitle: {
       default: '',
     },
+    showModal: {
+      default: false,
+    },
   },
   methods: {
     closeModalCreate() {
@@ -49,53 +60,58 @@ export default {
 @import "../../styles/variables";
 
 .modal {
-  position: absolute;
+  position: fixed;
   z-index: 3;
 
-  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  max-width: 900px;
   padding: 50px;
   background-color: #FFFAF0;
   border-radius: 30px;
-  // opacity: 0.9;
 
-// &::after {
-//   content: '';
-//   position: absolute;
-//   z-index: -1;
-//   top: 0;
-//   bottom: 0;
-//   right: 0;
-//   left: 0;
-//   display: block;
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 
-//   width: 100%;
-//   height: 100%;
+  &__wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
 
-//   background-color: #fff;
-// }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-&__wrapper {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  &__heading {
+    margin-bottom: 60px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: #00BFFF;
-  // opacity: 0.9;
+    font-size: 2.5rem;
+    color: $blue;
+    font-weight: bold;
+  }
 }
 
-&__heading {
-  margin-bottom: 60px;
-
-  font-size: 2.5rem;
-  color: $blue;
-  font-weight: bold;
+.v-enter-active,
+.v-leave-active {
+ transition: opacity .5s;
 }
+
+.v-enter,
+.v-leave-active {
+ opacity: 0;
 }
 </style>

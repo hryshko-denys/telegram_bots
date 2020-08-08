@@ -1,21 +1,25 @@
 <template>
   <div class="home">
     <Button v-on:showPopUp="showPopUpCreate" />
-    <ModalCreate
-      v-if="isModalCreateVisible"
-      v-on:closeModal="closeModalCreate"
-      v-on:addBot="addNewBot"
-      v-bind:title="'Describe a new bot'"
-      v-bind:buttonTitle="'Add new bot'"
-    />
-    <ModalCreate
-      v-if="isModalEditVisible"
-      v-on:closeModal="closeModalCreate"
-      v-on:addBot="addNewBot"
-      v-bind:title="'Edit bot info'"
-      v-bind:botInfo="botToEdit"
-      v-bind:buttonTitle="'Save changes'"
-    />
+    <transition>
+      <ModalCreate
+        v-if="isModalCreateVisible"
+        v-on:closeModal="closeModalCreate"
+        v-on:addBot="addNewBot"
+        v-bind:title="'Describe a new bot'"
+        v-bind:buttonTitle="'Add new bot'"
+        v-bind:showModal="isModalCreateVisible"
+      />
+      <ModalCreate
+        v-if="isModalEditVisible"
+        v-on:closeModal="closeModalCreate"
+        v-on:addBot="addNewBot"
+        v-bind:title="'Edit bot info'"
+        v-bind:botInfo="botToEdit"
+        v-bind:buttonTitle="'Save changes'"
+        v-bind:showModal="isModalEditVisible"
+      />
+    </transition>
     <h2
       class="home__heading"
       v-if="!botsList.length"

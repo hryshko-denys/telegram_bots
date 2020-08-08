@@ -24,6 +24,10 @@ body {
 }
 
 #app {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
   font-family: 'Raleway', 'Arial', sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
