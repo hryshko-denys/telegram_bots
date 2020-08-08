@@ -27,6 +27,7 @@ export default {
 
 <style lang="scss">
 .page {
+
   margin-bottom: 40px;
 
   line-height: 100px;

@@ -68,7 +68,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import "../../styles/variables";
 
 .modal {
 
@@ -81,7 +80,6 @@ export default {
     border-radius: 10px;
     background-color: #87CEEB;
     transition: background-color 0.2s cubic-bezier(.4,0,.2,1);
-    // opacity: 0.7;
   }
 
   &__dragging {

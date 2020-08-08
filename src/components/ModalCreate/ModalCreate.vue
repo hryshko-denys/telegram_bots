@@ -60,6 +60,7 @@ export default {
 @import "../../styles/variables";
 
 .modal {
+
   position: fixed;
   z-index: 3;
 

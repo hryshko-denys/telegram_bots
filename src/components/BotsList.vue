@@ -42,6 +42,7 @@ export default {
 @import "../styles/extends";
 
 .bots {
+
   max-width: 35%;
   margin: 0 auto;
 
@@ -83,6 +84,7 @@ export default {
     border-radius: 1rem 1rem 0 1rem;
     overflow: hidden;
   }
+
   &__item::before {
     content: counter(gradient-counter);
     display: flex;

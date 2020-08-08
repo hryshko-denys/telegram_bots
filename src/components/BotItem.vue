@@ -35,6 +35,7 @@ export default {
 @import "../styles/variables";
 
 .bots {
+
   &__name {
     font-size: 2rem;
     color: #FFA07A;
@@ -93,9 +94,11 @@ export default {
   &__container:hover &__left {
     transform: rotate(-45deg);
   }
+
   &__container:hover &__right {
     transform: rotate(45deg);
   }
+
   &__container:hover &__close {
     opacity: 1;
   }

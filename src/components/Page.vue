@@ -54,6 +54,16 @@ export default {
       botToEdit: null,
     };
   },
+  mounted() {
+    if (localStorage.botsList) {
+      this.botsList = JSON.parse(localStorage.getItem('botsList'));
+    }
+  },
+  watch: {
+    botsList() {
+      localStorage.setItem('botsList', JSON.stringify(this.botsList));
+    },
+  },
   methods: {
     showPopUpCreate() {
       this.isModalCreateVisible = true;
