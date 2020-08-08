@@ -70,13 +70,11 @@ export default {
       this.botsList = this.botsList.filter((bot) => bot.id !== botId);
     },
     addNewBot(bot, modalTitle) {
-      console.log(bot, modalTitle);
       if (modalTitle === 'Describe a new bot') {
         this.botsList = [...this.botsList, bot];
         this.isModalCreateVisible = false;
       } else if (modalTitle === 'Edit bot info') {
         this.botsList = this.botsList.map((currentBot) => {
-          console.log(currentBot.id, bot.id);
           if (currentBot.id === bot.id) {
             return {
               id: bot.id,
